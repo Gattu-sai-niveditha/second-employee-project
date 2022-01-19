@@ -1,0 +1,181 @@
+<mvc:View xmlns:table="sap.ui.table"
+    controllerName="ui.MySecondEmployee.secondemployeeproject.controller.MyEmployeeProject"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+>
+        <App id="app">
+            
+                <Page id="page" >
+                    
+                   <f:SimpleForm id="SimpleForm1"  title="Employee Details" editable="true" singleContainerFullSize="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="12"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="2"
+                    columnsM="2" >
+
+                                          <!-- Personal -->
+                    <f:content>                  
+                    <core:Title id="Title1" text="Personal" />
+
+                    <Label id="Label1" labelFor="Input1" text="{i18n>Employee.Employee_Id}" required="true" ></Label>
+                    <Input id="Input1" placeholder="{i18n>Employee.Name.Employee_Id.placeholder}" value="{EmployeeModel>/Employee>Employee_Id}"/>
+
+                    <Label id="Label2" labelFor="Input2" text="{i18n>Employee.Name}" required="true" ></Label>
+                    <Input id="Input2"  placeholder="{i18n>Employee.Name.FName.placeholder}" value="{EmployeeModel>/Employee>FName}" change="onChangeFname" 
+                    valueState="{EmployeeModel>/EmployeeValueState>FName_VS}" valueStateText="{EmployeeModel>/EmployeeValueState>FName_VST}" />
+
+                    <Input id="Input3"  placeholder="{i18n>Employee.Name.LName.placeholder}" value="{EmployeeModel>/Employee>LName}" change="onChangeLname" 
+                    valueState="{EmployeeModel>/EmployeeValueState>LNamee_VS}" valueStateText="{EmployeeModel>/EmployeeValueState>LName_VST}" />
+
+                    <Label id="Label3" labelFor="Input4" text="{i18n>Employee.Mobile}" required="true" ></Label>
+                    <Input id="Input4" placeholder="{i18n>Employee.Mobile.placeholder}" type="Number"  change="onChangeTel" value="{EmployeeModel>/Employee>Mobile}" />
+
+                    <Label id="Label4" labelFor="Input5" text="{i18n>Employee.Email}" required="true" ></Label>
+                    <Input id="Input5"  placeholder="{i18n>Employee.Email.placeholder}" type="Email" value="{EmployeeModel>/Employee>Email_Id}" />
+
+                    <Label id="Label5" labelFor="RadioButtonGroup1" text="Gender" ></Label>
+                    <RadioButtonGroup id="RadioButtonGroup1" columns="3" >
+                        <RadioButton id="RadioButton1" text="Male" selected="true" />
+                        <RadioButton id="RadioButton2" text="Female" />
+                        <RadioButton id="RadioButton3" text="Prefer not to say" />
+                    </RadioButtonGroup>
+                    <Label id="Label9" labelFor="DatePicker1" text="DOB" ></Label>
+                    <DatePicker id="DatePicker1" placeholder="Enter DOB" ></DatePicker>
+
+
+
+                                     <!-- Address -->
+
+
+
+                    <core:Title id="Title2" text="Address" />
+
+                    <Label id="Label6" labelFor="Input7" text="{i18n>Employee.Pincode}" ></Label>
+                    <Input id="Input7" placeholder="{i18n>Employee.Pincode.placeholder}" value="{EmployeeModel>/Employee>Pincode}" />
+
+                    <Label id="Label7" labelFor="Input8" text="{i18n>Employee.Hometown}" ></Label>
+                    <Input id="Input8" placeholder="{i18n>Employee.Hometown.placeholder}" value="{EmployeeModel>/Employee>Hometown}" />
+
+                    <Label id="Label8" labelFor="Input9" text="{i18n>Employee.Landmark}" ></Label>
+                    <Input id="Input9" placeholder="{i18n>Employee.Landmark.placeholder}" value="{EmployeeModel>/Employee>Landmark}" />
+                    </f:content>
+                    </f:SimpleForm>
+
+                                                     <!-- Table Creation -->
+                    <Table id="Table1" items="{EmployeeModel>/EmployeeList}" >
+                                                     <!-- Columns Creation  -->
+                            <columns>
+                                <Column id="Column1" >
+                                <Text id="Text1" text="Employee Id" ></Text>
+                                </Column>
+
+                                <Column id="Column2" >
+                                <Text id="Text2" text="Employee Name" ></Text>
+                                </Column>
+
+                                <Column id="Column3" >
+                                <Text id="Text3" text="Mobile" ></Text>
+                                </Column>
+
+                                <Column id="_IDGenColumn4" >
+                                <Text id="_IDGenText1" text="Email" ></Text>
+                                </Column>
+
+                                <Column id="Column5" >
+                                <Text id="Text5" text="Gender" ></Text>
+                                </Column>
+
+                                <Column id="Column6" >
+                                <Text id="Text6" text="DOB" ></Text>
+                                </Column>
+
+                                <Column id="Column7" >
+                                <Text id="Text7" text="Pincode"></Text>
+                                </Column>
+
+                                <Column id="Column8" >
+                                <Text id="Text8" text="Hometown" ></Text>
+                                </Column>
+
+                                <Column id="Column9" >
+                                <Text id="Text9" text="Landmark" ></Text>
+                                </Column>
+
+                                <Column id="Column10" >
+                                <Text id="Text10" text="Action" ></Text>
+                                </Column>
+                            </columns>
+                        <items>
+                            <ColumnListItem id="ColumnListItem1" >
+                                <cells>
+                                <Text id="_IDGenText2" text="{EmployeeModel>Employee_Id}" ></Text>
+                                <!-- <Text id="_IDGenText3" text="{EmployeeModel>FName} {EmployeeModel>LName} "></Text> -->
+                                <Text id="Text11"   text="{parts:[
+                                                 {path : 'EmployeeModel>FName'},
+                                                 {path : 'EmployeeModel>LName'},
+                                                 {path : 'EmployeeModel>Gender'}
+                                             ],
+                                             formatter : '.MyFormatter'
+                                    }"></Text>
+                                <!-- <Text id="_IDGenText4" text="{EmployeeModel>Mobile}" ></Text> -->
+                            <ObjectNumber id="ObjectNumber1"  number="{EmployeeModel>Mobile}" 
+                                        state="{
+                                        path : 'EmployeeModel>Mobile',
+                                        formatter : '.ValidateMobile'
+                                    }"/>
+                                <Text id="_IDGenText5" text="{EmployeeModel>Email_Id}" ></Text>
+                                <Text id="_IDGenText6" text="{EmployeeModel>Gender}" ></Text>
+                                <Text id="_IDGenText7" text="{EmployeeModel>DOB}" ></Text>
+                                <Text id="_IDGenText8" text="{EmployeeModel>Pincode}" ></Text>
+                                <Text id="_IDGenText9" text="{EmployeeModel>Hometown}" ></Text>
+                                <Text id="_IDGenText10" text="{EmployeeModel>Landmark}" ></Text>
+                                <Button id="_IDGenButton1" icon="sap-icon://show" press="onPressShow" tooltip="View"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>    
+                    </Table>
+                    
+                    <Panel id="_IDGenPanel1" >
+                        <headerToolbar>
+                            <OverflowToolbar id="_IDGenOverflowToolbar1" >
+                            <Title id="_IDGenTitle1" text="Panel"/>
+                            <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                            <Button id="_IDGenButton2" icon="sap-icon://settings" />
+                            <Button id="_IDGenButton3" icon="sap-icon://drop-down-list" />
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <content>
+                        <Text id="_IDGenText11"  text="This approach is meant to communicate the simplicity, sophistication, and integrity represented by SAP solutions.
+                         The style integrates basic geometric shapes in order to give a more prominent appearance. Icons can be supported in multiple file formats.
+                          However, SAP delivers icons as font format by default."/>
+                        </content>
+                    </Panel>                                
+                                          
+
+                                                           <!-- Footer -->
+                    <footer>
+                        <Toolbar id="Toolbar1" >
+                            <ToolbarSpacer id="ToolbarSpacer1" />
+                            <Button id="Button1" text="Save" type="Emphasized" press="onPressSave" />
+                            <Button id="Button2" text="Clear" press="onPressClear" />
+                        </Toolbar>
+                    </footer>
+
+                </Page>
+            
+        </App>
+    
+</mvc:View>
